@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BiddingSystem.Controllers
 {
+
+    [ApiController]
+    [Route("/api/[controller]")]
     public class BidController : Controller
     {
         // GET: /<controller>/

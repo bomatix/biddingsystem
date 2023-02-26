@@ -3,10 +3,10 @@
 namespace BiddingSystem.Controllers;
 
 [ApiController]
-[Route("[controller]")]
-public class OfferController : ControllerBase
+[Route("/api/[controller]")]
+public class OfferController : Controller
 {
-    private static IEnumerable<Models.Offer> Offers = new List<Models.Offer> {
+    private static readonly IEnumerable<Models.Offer> Offers = new List<Models.Offer> {
         new Models.Offer(title: "First offer", description: "Description of the first offer", price: 3, password: "asdf"),
         new Models.Offer(title: "Second offer", description: "Description of the second offer", price: 4, password: "asdf"),
         new Models.Offer(title: "Third offer", description: "Description of the thirs offer", price: 5, password: "asdf")

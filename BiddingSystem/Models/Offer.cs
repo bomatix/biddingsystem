@@ -9,7 +9,10 @@ namespace BiddingSystem.Models
             Description = description;
             Price = price;
             Password = password;
+            IsOpen = true;
         }
+
+        public int Id { get; set; }
 
         public string Title { get; set; }
 
@@ -17,7 +20,9 @@ namespace BiddingSystem.Models
 
         public double Price { get; set; }
 
-        public string Password { get; set; }
+        public string? Password { get; set; }
+
+        public bool IsOpen { get; set; }
     }
 }
 
