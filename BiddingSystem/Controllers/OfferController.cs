@@ -7,7 +7,7 @@ namespace BiddingSystem.Controllers;
 [Route("/api/[controller]")]
 public class OfferController : Controller
 {
-    private static List<Models.Offer> Offers = new List<Models.Offer>();
+    public static List<Models.Offer> Offers = new List<Models.Offer>();
 
     [HttpGet]
     public IEnumerable<Models.Offer> Get()

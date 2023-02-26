@@ -34,7 +34,7 @@ const OfferDetails = (props) => {
                     </div>
                     <div>
                         <div><b>{offer.price} EUR</b></div>
-                        <button type="button" onClick={ () => navigate("/offer/"+offerId+"/create-bid") }class="btn btn-primary">Create a bid</button>
+                        <button type="button" onClick={ () => navigate("/offer/"+offerId+"/create-bid") } className="btn btn-primary">Create a bid</button>
                     </div>
                 </div>
                 {bids.length > 0 && <div>
