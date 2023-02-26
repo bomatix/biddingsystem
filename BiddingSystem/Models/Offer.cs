@@ -3,6 +3,8 @@ namespace BiddingSystem.Models
 {
     public class Offer
     {
+        private static int currentId = 0;
+
         public Offer(string title, string description, double price, string password)
         {
             Title = title;
@@ -10,6 +12,7 @@ namespace BiddingSystem.Models
             Price = price;
             Password = password;
             IsOpen = true;
+            Id = currentId++;
         }
 
         public int Id { get; set; }
