@@ -15,16 +15,11 @@ namespace BiddingSystem.Controllers
     {
         public static IList<Models.Bid> Bids = new List<Models.Bid>();
 
-        [HttpGet]
-        public IActionResult Get()
-        {
-            return View();
-        }
-
         [HttpPost]
-        public IActionResult Post()
+        public IResult Post([FromBody] Models.Bid bid)
         {
-            return View();
+            Bids.Add(bid);
+            return Results.Ok();
         }
 
         [HttpDelete]

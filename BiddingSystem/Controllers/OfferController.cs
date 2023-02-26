@@ -19,7 +19,7 @@ public class OfferController : Controller
     public IResult Post([FromBody] Models.Offer offer)
     {
         Offers.Add(offer);
-            return Results.Ok();
+        return Results.Ok();
     }
 
     [HttpGet("{id}")]

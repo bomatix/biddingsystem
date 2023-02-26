@@ -6,7 +6,7 @@ const Offer = (props) => {
     const navigate = useNavigate();
 
     const showOfferDetails = () => {
-        navigate("/offer/" + props.offer.id, {id: props.offer.id});
+        navigate("/offer/" + props.offer.id);
     }
 
     return (

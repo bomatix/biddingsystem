@@ -1,11 +1,14 @@
 ﻿import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
+import Bid from "./Bid";
+import { useNavigate } from "react-router-dom";
 
 const OfferDetails = (props) => {
 
     const [offer, setOffer] = useState();
     const [bids, setBids] = useState();
     const { offerId } = useParams();
+    const navigate = useNavigate();
 
     const fetchData = async () => {
         const response = await fetch('/api/offer/' + offerId);
@@ -31,13 +34,12 @@ const OfferDetails = (props) => {
                     </div>
                     <div>
                         <div><b>{offer.price} EUR</b></div>
+                        <button type="button" onClick={ () => navigate("/offer/"+offerId+"/create-bid") }class="btn btn-primary">Create a bid</button>
                     </div>
                 </div>
                 {bids.length > 0 && <div>
-                    <h4>Bids</h4>
-                    {bids.map(bid => <div>
-                        hello
-                    </div>)}
+                    <h4 className="mt-5">Bids</h4>
+                    {bids.map(bid => <Bid bid={bid} />)}
                 </div>}
             </div>
         )

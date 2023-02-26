@@ -11,7 +11,6 @@ const CreateOffer = () => {
         const result = await fetch("/api/offer", {
             method: "POST",
             mode: "cors",
-            datacache: false,
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
