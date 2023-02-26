@@ -13,8 +13,22 @@ namespace BiddingSystem.Controllers
     [Route("/api/[controller]")]
     public class BidController : Controller
     {
-        // GET: /<controller>/
-        public IActionResult Index()
+        public static IList<Models.Bid> Bids = new List<Models.Bid>();
+
+        [HttpGet]
+        public IActionResult Get()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Post()
+        {
+            return View();
+        }
+
+        [HttpDelete]
+        public IActionResult Delete()
         {
             return View();
         }

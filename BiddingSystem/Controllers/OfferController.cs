@@ -12,7 +12,7 @@ public class OfferController : Controller
     [HttpGet]
     public IEnumerable<Models.Offer> Get()
     {
-        return Offers;
+        return Offers.Where(offer => offer.IsOpen);
     }
 
     [HttpPost]
@@ -20,6 +20,27 @@ public class OfferController : Controller
     {
         Offers.Add(offer);
             return Results.Ok();
+    }
+
+    [HttpGet("{id}")]
+    public OfferWithBids Get(int id)
+    {
+        Models.Offer offer = Offers.Where(offer => offer.Id == id).First();
+        IEnumerable<Models.Bid> bids = BidController.Bids.Where(bid => bid.OfferId == id);
+        var result = new OfferWithBids(offer: offer, bids: bids);
+        return result;
+    }
+}
+
+public class OfferWithBids
+{
+    public Models.Offer Offer { get; set; }
+    public IEnumerable<Models.Bid> Bids { get; set; }
+
+    public OfferWithBids(Models.Offer offer, IEnumerable<Models.Bid> bids)
+    {
+        Offer = offer;
+        Bids = bids;
     }
 }
 

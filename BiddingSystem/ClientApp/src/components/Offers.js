@@ -8,12 +8,11 @@ const Offers = () => {
     const fetchOffers = async () => {
         const response = await fetch('api/offer');
         const data = await response.json();
-        console.log(data)
         setOffers(data)
     }
 
     useEffect(() => {
-        const response = fetchOffers()
+        fetchOffers()
     }, []);
 
 
