@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Text.Json.Serialization;
+
 namespace BiddingSystem.Models
 {
     public class Bid
     {
         private static int currentId = 0;
+
+        [JsonConstructor]
         public Bid(int offerId, string buyerName, double amount, string password)
         {
             Id = currentId++;
@@ -11,6 +15,14 @@ namespace BiddingSystem.Models
             BuyerName = buyerName;
             Amount = amount;
             Password = password;
+        }
+
+        public Bid(Bid bid)
+        {
+            Id = bid.Id;
+            OfferId = bid.OfferId;
+            BuyerName = bid.BuyerName;
+            Amount = bid.Amount;
         }
 
         public int Id { get; set; }

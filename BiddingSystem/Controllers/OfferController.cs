@@ -12,7 +12,7 @@ public class OfferController : Controller
     [HttpGet]
     public IEnumerable<Models.Offer> Get()
     {
-        return Offers.Where(offer => offer.IsOpen);
+        return Offers.Where(offer => offer.IsOpen).Select(offer => new Models.Offer(offer));
     }
 
     [HttpPost]
@@ -25,10 +25,22 @@ public class OfferController : Controller
     [HttpGet("{id}")]
     public OfferWithBids Get(int id)
     {
-        Models.Offer offer = Offers.Where(offer => offer.Id == id).First();
-        IEnumerable<Models.Bid> bids = BidController.Bids.Where(bid => bid.OfferId == id);
+        Models.Offer offer = Offers.Where(offer => offer.Id == id).Select(offer => new Models.Offer(offer)).First();
+        IEnumerable<Models.Bid> bids = BidController.Bids.Where(bid => bid.OfferId == id).Select(bid => new Models.Bid(bid));
         var result = new OfferWithBids(offer: offer, bids: bids);
         return result;
+    }
+
+    [HttpPut]
+    [Route("/api/offer/close")]
+    public IResult Close([FromBody] CloseOfferParams parameters)
+    {
+        Models.Offer? offer = Offers.Where(offer => offer.Id == parameters.Id && offer.Password == parameters.Password).FirstOrDefault();
+        if (offer == null) return Results.Problem();
+
+        offer.IsOpen = false;
+        offer.SelectedBidId = parameters.SelectedBidId;
+        return Results.Ok();
     }
 }
 
@@ -42,5 +54,12 @@ public class OfferWithBids
         Offer = offer;
         Bids = bids;
     }
+}
+
+public class CloseOfferParams
+{
+    public int Id { get; set; }
+    public int SelectedBidId { get; set; }
+    public string Password { get; set; }
 }
 

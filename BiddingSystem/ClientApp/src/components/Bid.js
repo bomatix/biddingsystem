@@ -4,6 +4,9 @@ const Bid = (props) => {
 
     const [password, setPassword] = useState("");
 
+    const selectedClass = "btn btn-" + (!props.selected ? "outline-" : "") + "primary";
+
+
     const deleteBid = async () => {
         const result = await fetch("/api/bid", {
             method: "DELETE",
@@ -13,10 +16,7 @@ const Bid = (props) => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                BuyerName: props.bid.buyerName,
-                Amount: props.bid.amount,
                 Password: password,
-                OfferId: props.bid.offerId,
                 Id: props.bid.id
             })
         }).then((res) => {
@@ -32,6 +32,7 @@ const Bid = (props) => {
             <div>
                 <h3>{props.bid.buyerName}</h3>
                 <p>{props.bid.amount}</p>
+                <button onClick={() => props.selectBid(props.bid.id)} className={selectedClass}>{props.selected ? "Selected" : "Select bid"}</button>
             </div>
             <div>
                 <input type="text" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} className="form-control danger mb-2" />

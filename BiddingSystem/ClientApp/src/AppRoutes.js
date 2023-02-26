@@ -9,6 +9,10 @@ const AppRoutes = [
         element: <Offers/>
     },
     {
+        path: '/',
+        element: <Offers />
+    },
+    {
         path: '/create-offer',
         element: <CreateOffer/>
     },

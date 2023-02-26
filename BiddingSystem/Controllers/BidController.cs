@@ -23,19 +23,27 @@ namespace BiddingSystem.Controllers
         }
 
         [HttpDelete]
-        public IResult Delete([FromBody] Models.Bid bidToDelete)
+        public IResult Delete([FromBody] DeleteBidParams parameters)
         {
-            Models.Offer? offer = OfferController.Offers.Where(offer => offer.IsOpen && offer.Id == bidToDelete.OfferId).FirstOrDefault();
+            Models.Bid? bid = Bids.Where(bid => bid.Id == parameters.Id && bid.Password == parameters.Password).FirstOrDefault();
+            if (bid == null)
+            {
+                return Results.Problem();
+            }
+
+            Models.Offer? offer = OfferController.Offers.Where(offer => offer.IsOpen && offer.Id == bid.OfferId).FirstOrDefault();
 
             if (offer == null) return Results.Problem();
 
-            Models.Bid? bid = Bids.Where(bid => bid.Id == bidToDelete.Id && bid.Password == bidToDelete.Password).FirstOrDefault();
-            if (bid != null) {
-                bool removed = Bids.Remove(bid);
-                return removed ? Results.Ok() : Results.Problem();
-            }
-            return Results.Problem();
+            bool removed = Bids.Remove(bid);
+            return removed ? Results.Ok() : Results.Problem();
         }
+    }
+
+    public class DeleteBidParams
+    {
+        public int Id { get; set; }
+        public string Password { get; set; }
     }
 }
 

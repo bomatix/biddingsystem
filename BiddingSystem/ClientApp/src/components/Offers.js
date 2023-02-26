@@ -9,6 +9,7 @@ const Offers = () => {
         const response = await fetch('api/offer');
         const data = await response.json();
         setOffers(data)
+        console.log(data);
     }
 
     useEffect(() => {
@@ -17,7 +18,8 @@ const Offers = () => {
 
 
     return <div>
-        {offers.map(offer => <Offer offer={ offer }/>)}
+        {offers.length > 0 ? offers.map(offer => <Offer offer={offer} />) :
+        "No open offers. Create one!"}
     </div>
 }
 
