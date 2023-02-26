@@ -9,10 +9,16 @@ using Microsoft.AspNetCore.Mvc;
 namespace BiddingSystem.Controllers
 {
 
+    /// <summary>
+    /// Controller used for managing bids.
+    /// </summary>
     [ApiController]
     [Route("/api/[controller]")]
     public class BidController : Controller
     {
+        /// <summary>
+        /// List containing all added bids, that acts as a database.
+        /// </summary>
         public static IList<Models.Bid> Bids = new List<Models.Bid>();
 
         [HttpPost]

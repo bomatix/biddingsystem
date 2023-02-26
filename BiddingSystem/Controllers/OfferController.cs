@@ -3,10 +3,16 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BiddingSystem.Controllers;
 
+/// <summary>
+/// Controller used for managing offers.
+/// </summary>
 [ApiController]
 [Route("/api/[controller]")]
 public class OfferController : Controller
 {
+    /// <summary>
+    /// List containing all added offers and acts as a database.
+    /// </summary>
     public static List<Models.Offer> Offers = new List<Models.Offer>();
 
     [HttpGet]
